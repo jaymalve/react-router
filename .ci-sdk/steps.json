@@ -1,0 +1,4 @@
+{
+  "base": [["build", "pnpm build"], ["typecheck", "pnpm typecheck"], ["lint", "pnpm lint"], ["test", "pnpm test"]],
+  "ci": [["build", "CI_SDK run build --filter './packages/**/*'"], ["typecheck", "CI_SDK run typecheck"], ["lint", "pnpm lint"], ["test", "CI_SDK test --since HEAD~1"]]
+}
