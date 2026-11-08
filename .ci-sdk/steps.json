@@ -1,0 +1,4 @@
+{
+  "base": [["build", "pnpm build"], ["typecheck", "pnpm typecheck"], ["lint", "pnpm exec eslint --cache --ignore-pattern '.ci-sdk/**' ."], ["test", "pnpm test"]],
+  "ci": [["build", "CI_SDK run build --filter './packages/**/*'"], ["typecheck", "CI_SDK run typecheck"], ["lint", "pnpm exec eslint --cache --ignore-pattern '.ci-sdk/**' ."], ["test", "CI_SDK test --since HEAD~1"]]
+}
