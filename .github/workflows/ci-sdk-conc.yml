@@ -1,0 +1,20 @@
+name: ci-sdk concurrency bench
+on:
+  push:
+    branches: [ci-sdk-conc]
+permissions:
+  contents: read
+jobs:
+  bench:
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    steps:
+      - uses: actions/checkout@v6
+      - uses: pnpm/action-setup@v6
+        with: { run_install: false }
+      - uses: actions/setup-node@v7
+        with: { node-version: 24 }
+      - run: pnpm install --frozen-lockfile
+        env: { PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD: "1" }
+      - run: npm install -g ci-sdk@0.0.6 turbo@2
+      - run: nproc && .ci-sdk/conc.sh
