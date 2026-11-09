@@ -1,9 +1,12 @@
 #!/bin/bash
 # Cold builds of ./packages/* at several concurrency limits; 3 rounds, order rotated per round.
 set -u
+set -f  # filters like ./packages/* go to the tools as written, not expanded by the shell
 clean() {
+  set +f
   find packages -path '*/node_modules' -prune -o \( -name dist -o -name .wireit -o -name .turbo -o -name '*.tsbuildinfo' \) -print0 | xargs -0 rm -rf
   rm -rf .wireit .turbo node_modules/.cache/ci-sdk node_modules/.cache/turbo
+  set -f
 }
 V=(
   "pnpm|pnpm run --filter ./packages/** build"
