@@ -1,0 +1,51 @@
+{
+  "upstream": "remix-run/react-router",
+  "branch": "main",
+  "node": "24.22.1",
+  "pm": "pnpm",
+  "install": "pnpm install --frozen-lockfile",
+  "env": {
+    "PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD": "1"
+  },
+  "notes": "Same steps as the 0.0.4 benchmark (ci-sdk-job3 in jaymalve/react-router), re-run with the current ci-sdk.",
+  "jobs": {
+    "job": {
+      "base": [
+        [
+          "build",
+          "pnpm build"
+        ],
+        [
+          "typecheck",
+          "pnpm typecheck"
+        ],
+        [
+          "lint",
+          "pnpm exec eslint --cache ."
+        ],
+        [
+          "test",
+          "pnpm test"
+        ]
+      ],
+      "ci": [
+        [
+          "build",
+          "CI_SDK run build --filter './packages/**/*'"
+        ],
+        [
+          "typecheck",
+          "CI_SDK run typecheck"
+        ],
+        [
+          "lint",
+          "pnpm exec eslint --cache ."
+        ],
+        [
+          "test",
+          "CI_SDK test --since HEAD~1"
+        ]
+      ]
+    }
+  }
+}

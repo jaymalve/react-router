@@ -41,3 +41,7 @@ worker-configuration.d.ts
 
 .claude/settings.local.json
 .claude/skills
+
+# ci-sdk bench
+/.ci-sdk/
+/.bench-cache/
